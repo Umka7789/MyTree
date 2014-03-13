@@ -1,8 +1,10 @@
 package ru.apache.maven;
-import java.util.ArrayList;
 
 
 public class Main {
+
+    private static boolean programRunning = true;
+    private static Menu mainMenu;
 
     public static void main(String[] args) {
 
@@ -14,87 +16,87 @@ public class Main {
         newTree.addNode(2,"Child2-1");
 
         newTree.printTree();
-        printCommands();
 
 
-      boolean running = true;
+        mainMenu = new Menu();
+        mainMenu.addMenuItem(  new MenuItem (new addNodeCommand(newTree), "Add new node.")  );
+        mainMenu.addMenuItem(  new MenuItem (new changeNodeParCommand(newTree), "Change node's parent.")  );
+        mainMenu.addMenuItem(  new MenuItem (new changeNodeNameCommand(newTree), "Change node's name")  );
+        mainMenu.addMenuItem(  new MenuItem (new changeRootNodeCommand(newTree), "Change tree's root node."));
+        mainMenu.addMenuItem(  new MenuItem (new deleteNodeCommand(newTree), "Delete node.")  );
+        mainMenu.addMenuItem(  new MenuItem (new printTreeCommand(newTree), "Print tree.")  );
+        mainMenu.addMenuItem(  new MenuItem (new showHelpCommand(), "Show help.")  );
+        mainMenu.addMenuItem(  new MenuItem (new exitCommand(), "Exit.")  );
 
-      while(running) {
-            System.out.println();
-            System.out.print("Enter number of the command:");
+
+
+
+        printMenu();
+
+
+
+        while (programRunning) {
+            System.out.print("\nEnter number of the command:");
             int command = readInt();
 
-
-            int parentId, childId, id;
-            String name;
-
-            switch (command) {
-
-                case 1:
-                    System.out.println("Enter parent node id (number before name)");
-                    parentId = readInt();
-                    System.out.println("Enter node name");
-                    name = readString();
-
-                    if (newTree.addNode(parentId, name) == false)
-                        System.out.println("There is no node with number " + parentId);
-                    break;
-
-                case 2:
-                    System.out.println("Enter new parent node id (number before name)");
-                    parentId = readInt();
-                    System.out.println("Enter child node id (number before name)");
-                    childId = readInt();
-
-                    if( newTree.changeParent(parentId, childId) == false)
-                        System.out.println("You entered incorrect ids");
-                    break;
-                case 3:
-                    System.out.println("Enter  node's id (number before name)");
-                    id = readInt();
-                    System.out.println("Enter new name");
-                    name = readString();
-                    if (newTree.changeNodeName(name, id) == false)
-                        System.out.println("There is no node with number " + id);
-                    break;
-                case 4: break;
-
-                case 5:
-                    System.out.println("Enter  node's id (number before name)");
-                    id = readInt();
-                    if (newTree.deleteNode(id) == false)
-                        System.out.println("There is no node with number " + id);
-                    break;
-                case 6:
-                    newTree.printTree();
-                    break;
-                case 7:
-                    printHelp();
-                    break;
-                case 8:
-                    running = false;
-                    break;
-
-                default: System.out.println("Incorrect command number!");
-
-            }
+            mainMenu.callMenu(command);
 
 
-
-       }
+        }
+//      while(true) {
+//
+//          System.out.print("\nEnter number of the command:");
+//          int command = readInt();
+//
+//          if(command == 8)
+//              break;
+//
+//
+//          switch (command) {
+//
+//                case 1:
+//                    addNode.execute();
+//                    break;
+//
+//                case 2:
+//                    changeNodeParent.execute();
+//                    break;
+//
+//                case 3:
+//                    changeNodeName.execute();
+//                    break;
+//                case 4: break;
+//
+//                case 5:
+//                    deleteNode.execute();
+//                    break;
+//                case 6:
+//                    printTree.execute();
+//                    break;
+//                case 7:
+//                    printHelp();
+//                    break;
+//
+//                default: System.out.println("Incorrect command number!");
+//
+//            }
+//
+//
+//
+//       }
 
 
 
     }
 
-
-    private static void printHelp() {
-        System.out.println("** Just do it =D **");
-        printCommands();
+    static void printMenu() {
+        mainMenu.printMenu();
     }
 
-
-    private static int readInt() {
+    static void exitProgram() {
+        programRunning = false;
+    }
+    static int readInt() {
 
         java.io.BufferedReader jin =
                 new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
@@ -115,7 +117,7 @@ public class Main {
         return buf;
     }
 
-    private static String readString() {
+    static String readString() {
 
         java.io.BufferedReader jin =
                 new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
@@ -134,20 +136,7 @@ public class Main {
 
 
     }
-    private static void printCommands() {
-        System.out.println("");
-        System.out.println("**********************");
-        System.out.println("* Available commands *");
-        System.out.println("**********************");
-        System.out.println("1. Add new node.");
-        System.out.println("2. Change node's parent.");
-        System.out.println("3. Change node's name.");
-        System.out.println("4. Change tree's root node.");
-        System.out.println("5. Delete node.");
-        System.out.println("6. Print tree.");
-        System.out.println("7. Help.");
-        System.out.println("8. Exit.");
-        System.out.println("");
-    }
+
+
 }
 
