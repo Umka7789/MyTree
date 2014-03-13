@@ -1,5 +1,5 @@
-package ru.apache.maven;
-import static ru.apache.maven.Main.printMenu;
+package ru.apache.Sirotin;
+import static ru.apache.Sirotin.Main.printMenu;
 
 class showHelpCommand implements Command {
 

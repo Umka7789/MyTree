@@ -1,4 +1,4 @@
-package ru.apache.maven;
+package ru.apache.Sirotin;
 
 import java.util.ArrayList;
 

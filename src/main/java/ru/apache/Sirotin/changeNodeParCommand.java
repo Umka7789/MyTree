@@ -1,6 +1,5 @@
-package ru.apache.maven;
-import static ru.apache.maven.Main.readInt;
-import static ru.apache.maven.Main.readString;
+package ru.apache.Sirotin;
+import static ru.apache.Sirotin.Main.readInt;
 
 /**
  * Created by Администратор on 13.03.14.

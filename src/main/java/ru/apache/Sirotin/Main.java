@@ -1,4 +1,4 @@
-package ru.apache.maven;
+package ru.apache.Sirotin;
 
 
 public class Main {
@@ -28,64 +28,14 @@ public class Main {
         mainMenu.addMenuItem(  new MenuItem (new showHelpCommand(), "Show help.")  );
         mainMenu.addMenuItem(  new MenuItem (new exitCommand(), "Exit.")  );
 
-
-
-
         printMenu();
-
-
 
         while (programRunning) {
             System.out.print("\nEnter number of the command:");
             int command = readInt();
 
             mainMenu.callMenu(command);
-
-
         }
-//      while(true) {
-//
-//          System.out.print("\nEnter number of the command:");
-//          int command = readInt();
-//
-//          if(command == 8)
-//              break;
-//
-//
-//          switch (command) {
-//
-//                case 1:
-//                    addNode.execute();
-//                    break;
-//
-//                case 2:
-//                    changeNodeParent.execute();
-//                    break;
-//
-//                case 3:
-//                    changeNodeName.execute();
-//                    break;
-//                case 4: break;
-//
-//                case 5:
-//                    deleteNode.execute();
-//                    break;
-//                case 6:
-//                    printTree.execute();
-//                    break;
-//                case 7:
-//                    printHelp();
-//                    break;
-//
-//                default: System.out.println("Incorrect command number!");
-//
-//            }
-//
-//
-//
-//       }
-
-
 
     }
 

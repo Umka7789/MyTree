@@ -1,4 +1,4 @@
-package ru.apache.maven;
+package ru.apache.Sirotin;
 
 /**
  * Created by Администратор on 11.03.14.
