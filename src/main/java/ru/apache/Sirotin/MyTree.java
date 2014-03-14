@@ -12,18 +12,10 @@ class MyTree {
     }
 
 
-   public boolean deleteNode(int noteId) {
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
-       Node node = this.getNodeById(noteId);
-       if(node == null)
-           return false;
-
-       if(node == this.rootNode)
-           return false;
-
-       node.getParent().deleteChild(node);
-       return true;
-   }
 
     public boolean changeParent(int newParentId, int childId) {
 
@@ -58,6 +50,7 @@ class MyTree {
         return true;
     }
 
+
     public void printTree() {
         System.out.println("");
         System.out.println("********** Our tree ***********");
@@ -65,6 +58,7 @@ class MyTree {
         System.out.println("*******************************");
         System.out.println("");
     }
+
 
     public boolean changeNodeName (String newName, int id) {
 
@@ -77,7 +71,11 @@ class MyTree {
         return true;
     }
 
-    private Node getNodeById (int id) {
+    Node getRootNode() {
+        return this.rootNode;
+    }
+
+    Node getNodeById (int id) {
         return this.rootNode.getNodeById(id);
     }
 

@@ -7,15 +7,31 @@ import static ru.apache.Sirotin.Main.readString;
 
 
 /**
- * Created by Администратор on 13.03.14.
+ * Class implements interface {@link ru.apache.Sirotin.Command}.
+ *
  */
 class addNodeCommand implements Command {
 
+    /**
+     * Object of a class {@link ru.apache.Sirotin.MyTree},
+     */
+
     private MyTree tree;
+
+
+    /**
+     * Constructor initialize field {@link ru.apache.Sirotin.addNodeCommand#tree}
+     */
 
     addNodeCommand(MyTree tree) {
         this.tree = tree;
     }
+
+
+    /**
+     * Method ask user to input id of any existing node and name of a new node.
+     * ID and name uses to call  {@link ru.apache.Sirotin.MyTree#addNode(int, String)}
+     */
 
     public void execute() {
         System.out.println("Enter parent node id (number before name)");

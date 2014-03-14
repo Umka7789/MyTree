@@ -11,10 +11,7 @@ class deleteNodeCommand implements Command {
     }
 
     public void execute() {
-        System.out.println("Enter  node's id (number before name)");
-        int id = readInt();
-        if (this.tree.deleteNode(id) == false)
-            System.out.println("There is no node with number " + id);
+        tree.accept(new deleteNodeVisitor());
     }
 
     private MyTree tree;
