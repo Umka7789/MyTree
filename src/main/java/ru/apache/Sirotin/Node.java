@@ -14,6 +14,7 @@ class Node {
     }
 
 
+	//TODO: этого здесь не должно быть, это должен делать visitor
     public void print(int indent) {
 
         for (int i = 0; i < indent; i++) {
@@ -71,6 +72,7 @@ class Node {
     }
 
 
+	//TODO: переменные размещаем НАД методами - это хороший стиль
     private int id;
     private String name;
     private Node parent;

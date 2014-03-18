@@ -51,6 +51,7 @@ class MyTree {
     }
 
 
+	// TODO: вот этого здесь не должно быть, если у тебя есть Visitor
     public void printTree() {
         System.out.println("");
         System.out.println("********** Our tree ***********");
@@ -71,14 +72,20 @@ class MyTree {
         return true;
     }
 
+	//TODO: почитай про модификаторы доступа в java
+	// и ответь на вопрос, действительно ли здесь нужен default модификатор доступа?
     Node getRootNode() {
         return this.rootNode;
     }
 
+	//TODO: не нужно на каждый чих дергать this, это не похапэ, исплользуй this только тогда когда у тебя есть аргумент функции
+	// с таким же именем как поле в классе, что бы указать компилятору кого из них использовать.
     Node getNodeById (int id) {
         return this.rootNode.getNodeById(id);
     }
 
+
+	//TODO: лучше все поля класса объявлять НАД методами.
     private Node rootNode;
     private int currentId = 0;
 }

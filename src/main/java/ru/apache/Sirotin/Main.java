@@ -1,6 +1,13 @@
 package ru.apache.Sirotin;
 
-
+/**
+ * TODO: Как я уже говорил, нужно добавить логгирования с использование библиотеки logback и в качестве api к ней - slf4j
+ * Раздели классы на пакеты, объедени их логически.
+ * Довольно часто интерфейсы помещают отдельно, а их реализации в какой-нибудь пакет impl - этого делается для того,
+ * что бы пользователи библиотеки понимали, что это имплементация и на нее нельзя завяываться и использовали интерфейсы
+ * вместо конкретных классов, то есть использовали API.
+ *
+ */
 public class Main {
 
     private static boolean programRunning = true;
@@ -18,6 +25,8 @@ public class Main {
         newTree.printTree();
 
 
+		//TODO: read this: http://jlordiales.wordpress.com/2012/12/13/the-builder-pattern-in-practice/
+		// and use builder pattern to build menu and menu items
         mainMenu = new Menu();
         mainMenu.addMenuItem(  new MenuItem (new addNodeCommand(newTree), "Add new node.")  );
         mainMenu.addMenuItem(  new MenuItem (new changeNodeParCommand(newTree), "Change node's parent.")  );
@@ -28,6 +37,9 @@ public class Main {
         mainMenu.addMenuItem(  new MenuItem (new showHelpCommand(), "Show help.")  );
         mainMenu.addMenuItem(  new MenuItem (new exitCommand(), "Exit.")  );
 
+		//TODO: лучше бы вынести взаимодействие с пользователем в какой-нибудь отдельный класс, который будет
+		// печатать меню, читать ввод и запускать команды на исполнение
+		// Main пусть отвечает только за запуск и останов.
         printMenu();
 
         while (programRunning) {

@@ -2,6 +2,7 @@ package ru.apache.Sirotin;
 
 import static ru.apache.Sirotin.Main.readInt;
 
+//TODO: read java code convention and fix class name
 public class deleteNodeVisitor implements Visitor {
 
     public void visit(MyTree tree) {
