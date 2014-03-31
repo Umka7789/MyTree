@@ -2,10 +2,13 @@ package ru.apache.Sirotin;
 
 import java.util.ArrayList;
 
-/**
- * Created by Администратор on 11.03.14.
- */
-class Node {
+
+public class Node {
+
+    private int id;
+    private String name;
+    private Node parent;
+    private ArrayList<Node> children = new ArrayList<Node>();
 
     Node (String name, Node parent, int id) {
         this.name = name;
@@ -13,23 +16,10 @@ class Node {
         this.id = id;
     }
 
-
-	//TODO: этого здесь не должно быть, это должен делать visitor
-    public void print(int indent) {
-
-        for (int i = 0; i < indent; i++) {
-            System.out.print(" ");
-        }
-        System.out.println(this.id + ". " + this.name);
-
-        if (this.children.size() != 0) {
-            int newIndent = (this.name + this.id).length() + indent + 2;
-
-            for(Node temp: this.children) {
-                temp.print(newIndent);
-            }
-        }
+    public void accept(NodeVisitor visitor) {
+        visitor.visit(this);
     }
+
 
     public Node getNodeById (int id) {
         if (this.id == id)
@@ -43,6 +33,11 @@ class Node {
 
         return null;
     }
+
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
     public void setName(String newName) {
         this.name = newName;
     }
@@ -70,12 +65,5 @@ class Node {
     public Node getParent() {
         return this.parent;
     }
-
-
-	//TODO: переменные размещаем НАД методами - это хороший стиль
-    private int id;
-    private String name;
-    private Node parent;
-    private ArrayList<Node> children = new ArrayList<Node>();
 
 }

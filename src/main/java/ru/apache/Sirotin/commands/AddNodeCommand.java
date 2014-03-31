@@ -1,4 +1,8 @@
-package ru.apache.Sirotin;
+package ru.apache.Sirotin.commands;
+import ru.apache.Sirotin.Command;
+import ru.apache.Sirotin.MyTree;
+
+import static ru.apache.Sirotin.Main.LOG;
 import static ru.apache.Sirotin.Main.readInt;
 import static ru.apache.Sirotin.Main.readString;
 
@@ -11,9 +15,9 @@ import static ru.apache.Sirotin.Main.readString;
  *
  * ANER: то, что class implementes interface понятно и без этого коммента. В комментарии нужно описывать что класс делает
  *
- * TODO: read java code convention and fix class name
+
  */
-class addNodeCommand implements Command {
+public class AddNodeCommand implements Command {
 
     /**
      * Object of a class {@link ru.apache.Sirotin.MyTree},
@@ -23,12 +27,12 @@ class addNodeCommand implements Command {
 
 
     /**
-     * Constructor initialize field {@link ru.apache.Sirotin.addNodeCommand#tree}
+     * Constructor initialize field {@link AddNodeCommand#tree}
      */
 
 	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
 	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
-    addNodeCommand(MyTree tree) {
+    public AddNodeCommand(MyTree tree) {
         this.tree = tree;
     }
 
@@ -47,5 +51,7 @@ class addNodeCommand implements Command {
         if (this.tree.addNode(parentId, name) == false)
 			//TODO: use String#format!
             System.out.println("There is no node with number " + parentId);
+
+        LOG.info("New node was added");
     }
 }

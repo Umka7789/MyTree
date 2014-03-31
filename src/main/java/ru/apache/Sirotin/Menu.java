@@ -5,13 +5,11 @@ import java.util.ArrayList;
 
 class Menu {
 
+    private ArrayList<MenuItem> menuItems;
+
     Menu() {
 
-		//TODO: Если тебе заранее известент размер, то лучше его указать в конструкторе - будет меньше выделений памяти
-		// и эта штука будет работать быстрее. А еще за указание этого факта ты получше плюс на собеседовании =).
-		// Кстати, почитай заодно, почему ArrayList лучше чем LinkedList и про сложность индексированного доступа и про сложность
-		// вставки в ArrayList и LinkedList
-        menuItems = new ArrayList<MenuItem>();
+        menuItems = new ArrayList<MenuItem>(8);
     }
 
     void callMenu (int menuIndex) {
@@ -20,7 +18,6 @@ class Menu {
 
             System.out.println("Incorrect command number!");
             return;
-
         }
 
         menuItems.get(menuIndex).executeCommand();
@@ -41,5 +38,4 @@ class Menu {
         menuItems.add(item);
     }
 
-    private ArrayList<MenuItem> menuItems;
 }

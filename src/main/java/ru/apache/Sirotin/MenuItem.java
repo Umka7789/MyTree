@@ -1,9 +1,10 @@
 package ru.apache.Sirotin;
 
-/**
- * Created by Администратор on 13.03.14.
- */
+
 class MenuItem {
+
+    private Command command;
+    private String name;
 
     MenuItem(Command cmd, String name) {
         this.command = cmd;
@@ -11,12 +12,11 @@ class MenuItem {
     }
 
     void executeCommand() {
-        this.command.execute();
+        command.execute();
     }
 
     String getName() {
-        return this.name;
+        return name;
     }
-    private Command command;
-    private String name;
+
 }

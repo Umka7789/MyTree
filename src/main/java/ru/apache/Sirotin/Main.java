@@ -1,5 +1,11 @@
 package ru.apache.Sirotin;
 
+import ru.apache.Sirotin.commands.*;
+import ru.apache.Sirotin.treeVisitors.PrintTreeVisitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 /**
  * TODO: Как я уже говорил, нужно добавить логгирования с использование библиотеки logback и в качестве api к ней - slf4j
  * Раздели классы на пакеты, объедени их логически.
@@ -12,6 +18,8 @@ public class Main {
 
     private static boolean programRunning = true;
     private static Menu mainMenu;
+    static public final Logger LOG = LoggerFactory.getLogger(Main.class);
+
 
     public static void main(String[] args) {
 
@@ -22,20 +30,9 @@ public class Main {
         newTree.addNode(0,"Child3");
         newTree.addNode(2,"Child2-1");
 
-        newTree.printTree();
+        newTree.accept(new PrintTreeVisitor());
 
-
-		//TODO: read this: http://jlordiales.wordpress.com/2012/12/13/the-builder-pattern-in-practice/
-		// and use builder pattern to build menu and menu items
-        mainMenu = new Menu();
-        mainMenu.addMenuItem(  new MenuItem (new addNodeCommand(newTree), "Add new node.")  );
-        mainMenu.addMenuItem(  new MenuItem (new changeNodeParCommand(newTree), "Change node's parent.")  );
-        mainMenu.addMenuItem(  new MenuItem (new changeNodeNameCommand(newTree), "Change node's name")  );
-        mainMenu.addMenuItem(  new MenuItem (new changeRootNodeCommand(newTree), "Change tree's root node."));
-        mainMenu.addMenuItem(  new MenuItem (new deleteNodeCommand(newTree), "Delete node.")  );
-        mainMenu.addMenuItem(  new MenuItem (new printTreeCommand(newTree), "Print tree.")  );
-        mainMenu.addMenuItem(  new MenuItem (new showHelpCommand(), "Show help.")  );
-        mainMenu.addMenuItem(  new MenuItem (new exitCommand(), "Exit.")  );
+        mainMenu = new Director().buildMenu(new MenuBuilder(), newTree);
 
 		//TODO: лучше бы вынести взаимодействие с пользователем в какой-нибудь отдельный класс, который будет
 		// печатать меню, читать ввод и запускать команды на исполнение
@@ -51,14 +48,14 @@ public class Main {
 
     }
 
-    static void printMenu() {
+    public static void printMenu() {
         mainMenu.printMenu();
     }
 
-    static void exitProgram() {
+    public static void exitProgram() {
         programRunning = false;
     }
-    static int readInt() {
+    public static int readInt() {
 
         java.io.BufferedReader jin =
                 new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
@@ -79,7 +76,7 @@ public class Main {
         return buf;
     }
 
-    static String readString() {
+    public static String readString() {
 
         java.io.BufferedReader jin =
                 new java.io.BufferedReader(new java.io.InputStreamReader(System.in));

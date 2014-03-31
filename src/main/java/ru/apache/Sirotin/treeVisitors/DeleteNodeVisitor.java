@@ -1,9 +1,14 @@
-package ru.apache.Sirotin;
+package ru.apache.Sirotin.treeVisitors;
 
+import ru.apache.Sirotin.MyTree;
+import ru.apache.Sirotin.Node;
+import ru.apache.Sirotin.TreeVisitor;
+
+import static ru.apache.Sirotin.Main.LOG;
 import static ru.apache.Sirotin.Main.readInt;
 
-//TODO: read java code convention and fix class name
-public class deleteNodeVisitor implements Visitor {
+
+public class DeleteNodeVisitor implements TreeVisitor {
 
     public void visit(MyTree tree) {
 
@@ -23,6 +28,7 @@ public class deleteNodeVisitor implements Visitor {
         }
 
         node.getParent().deleteChild(node);
+        LOG.info("Some node was deleted");
 
     }
 }

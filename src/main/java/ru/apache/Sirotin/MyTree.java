@@ -1,30 +1,29 @@
 package ru.apache.Sirotin;
 
-/**
- * Created by Администратор on 11.03.14.
- */
-class MyTree {
+public class MyTree {
 
+    private Node rootNode;
+    private int currentId = 0;
 
     MyTree(String rootNodeName) {
-        this.rootNode = new Node(rootNodeName, null, this.currentId);
-        this.currentId++;
+        rootNode = new Node(rootNodeName, null, currentId);
+        currentId++;
     }
 
 
-    public void accept(Visitor visitor) {
+    public void accept(TreeVisitor visitor) {
         visitor.visit(this);
     }
 
 
     public boolean changeParent(int newParentId, int childId) {
 
-        Node newParent = this.getNodeById(newParentId);
+        Node newParent = getNodeById(newParentId);
 
         if(newParent == null)
             return false;
 
-        Node child = this.getNodeById(childId);
+        Node child = getNodeById(childId);
 
         if(child == null)
             return false;
@@ -41,29 +40,18 @@ class MyTree {
 
 
     public boolean addNode (int parentId, String name) {
-        Node parentNode = this.getNodeById(parentId);
+        Node parentNode = getNodeById(parentId);
         if(parentNode == null)
             return false;
 
-        parentNode.addChild(new Node(name, parentNode, this.currentId));
-        this.currentId++;
+        parentNode.addChild(new Node(name, parentNode, currentId));
+        currentId++;
         return true;
     }
 
-
-	// TODO: вот этого здесь не должно быть, если у тебя есть Visitor
-    public void printTree() {
-        System.out.println("");
-        System.out.println("********** Our tree ***********");
-        this.rootNode.print(0);
-        System.out.println("*******************************");
-        System.out.println("");
-    }
-
-
     public boolean changeNodeName (String newName, int id) {
 
-        Node node = this.getNodeById(id);
+        Node node = getNodeById(id);
 
         if(node == null)
             return false;
@@ -72,20 +60,13 @@ class MyTree {
         return true;
     }
 
-	//TODO: почитай про модификаторы доступа в java
-	// и ответь на вопрос, действительно ли здесь нужен default модификатор доступа?
-    Node getRootNode() {
-        return this.rootNode;
+    public Node getRootNode() {
+        return rootNode;
     }
 
-	//TODO: не нужно на каждый чих дергать this, это не похапэ, исплользуй this только тогда когда у тебя есть аргумент функции
-	// с таким же именем как поле в классе, что бы указать компилятору кого из них использовать.
-    Node getNodeById (int id) {
-        return this.rootNode.getNodeById(id);
+    public Node getNodeById (int id) {
+        return rootNode.getNodeById(id);
     }
 
 
-	//TODO: лучше все поля класса объявлять НАД методами.
-    private Node rootNode;
-    private int currentId = 0;
 }

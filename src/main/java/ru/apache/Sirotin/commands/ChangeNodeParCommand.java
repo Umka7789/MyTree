@@ -1,15 +1,18 @@
-package ru.apache.Sirotin;
+package ru.apache.Sirotin.commands;
+import ru.apache.Sirotin.Command;
+import ru.apache.Sirotin.MyTree;
+
+import static ru.apache.Sirotin.Main.LOG;
 import static ru.apache.Sirotin.Main.readInt;
 
-/**
- * Created by Администратор on 13.03.14.
- * //TODO: read java code convention and fix class name
- */
-class changeNodeParCommand implements Command {
+
+public class ChangeNodeParCommand implements Command {
+
+    private MyTree tree;
 
 	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
 	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
-	changeNodeParCommand(MyTree tree) {
+	public ChangeNodeParCommand(MyTree tree) {
         this.tree = tree;
     }
 
@@ -21,7 +24,9 @@ class changeNodeParCommand implements Command {
 
         if( this.tree.changeParent(parentId, childId) == false)
             System.out.println("You entered incorrect ids");
+
+        LOG.info("Node's parent was changed.");
     }
 
-    private MyTree tree;
+
 }
