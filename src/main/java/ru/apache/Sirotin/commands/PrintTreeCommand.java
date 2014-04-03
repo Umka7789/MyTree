@@ -5,12 +5,11 @@ import ru.apache.Sirotin.Command;
 import ru.apache.Sirotin.MyTree;
 import ru.apache.Sirotin.treeVisitors.PrintTreeVisitor;
 
-public class PrintTreeCommand implements Command {
+public class PrintTreeCommand extends AbstractCommand {
 
-    private MyTree tree;
 
     public PrintTreeCommand(MyTree tree) {
-       this.tree = tree;
+       super(tree);
    }
 
     public void execute() {

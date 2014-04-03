@@ -6,14 +6,11 @@ import static ru.apache.Sirotin.Main.LOG;
 import static ru.apache.Sirotin.Main.readInt;
 
 
-public class ChangeNodeParCommand implements Command {
+public class ChangeNodeParCommand extends AbstractCommand {
 
-    private MyTree tree;
 
-	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
-	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
 	public ChangeNodeParCommand(MyTree tree) {
-        this.tree = tree;
+        super(tree);
     }
 
     public void execute() {
@@ -22,10 +19,13 @@ public class ChangeNodeParCommand implements Command {
         System.out.println("Enter child node id (number before name)");
         int childId = readInt();
 
-        if( this.tree.changeParent(parentId, childId) == false)
+        if( this.tree.changeParent(parentId, childId) == false) {
             System.out.println("You entered incorrect ids");
+            LOG.error("Cant change node's parent. Reason: user entered incorrect id.");
+            return;
+        }
 
-        LOG.info("Node's parent was changed.");
+        LOG.info( String.format("Node's parent was changed. (Child's id: %d, New parent id: %d", childId, parentId) );
     }
 
 

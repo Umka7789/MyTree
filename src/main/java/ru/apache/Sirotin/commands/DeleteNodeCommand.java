@@ -6,18 +6,12 @@ import ru.apache.Sirotin.MyTree;
 
 import static ru.apache.Sirotin.Main.LOG;
 
-/**
- * Created by Администратор on 13.03.14.
 
- */
-public class DeleteNodeCommand implements Command {
+public class DeleteNodeCommand extends AbstractCommand {
 
-    private MyTree tree;
 
-	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
-	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
     public DeleteNodeCommand(MyTree tree) {
-        this.tree = tree;
+        super(tree);
     }
 
     public void execute() {

@@ -7,40 +7,17 @@ import static ru.apache.Sirotin.Main.readInt;
 import static ru.apache.Sirotin.Main.readString;
 
 
-
-
-
 /**
  * Class implements interface {@link ru.apache.Sirotin.Command}.
  *
- * ANER: то, что class implementes interface понятно и без этого коммента. В комментарии нужно описывать что класс делает
  *
-
  */
-public class AddNodeCommand implements Command {
 
-    /**
-     * Object of a class {@link ru.apache.Sirotin.MyTree},
-     */
+public class AddNodeCommand extends AbstractCommand {
 
-    private MyTree tree;
-
-
-    /**
-     * Constructor initialize field {@link AddNodeCommand#tree}
-     */
-
-	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
-	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
     public AddNodeCommand(MyTree tree) {
-        this.tree = tree;
+        super(tree);
     }
-
-
-    /**
-     * Method ask user to input id of any existing node and name of a new node.
-     * ID and name uses to call  {@link ru.apache.Sirotin.MyTree#addNode(int, String)}
-     */
 
     public void execute() {
         System.out.println("Enter parent node id (number before name)");
@@ -48,10 +25,12 @@ public class AddNodeCommand implements Command {
         System.out.println("Enter node name");
         String name = readString();
 
-        if (this.tree.addNode(parentId, name) == false)
-			//TODO: use String#format!
-            System.out.println("There is no node with number " + parentId);
+        if (this.tree.addNode(parentId, name) == false) {
+            System.out.println( String.format("There is no node with number  %d", parentId) );
+            LOG.error(String.format("Cant create new node. Reason: there is no node with number  %d", parentId));
+            return;
+        }
 
-        LOG.info("New node was added");
+        LOG.info( String.format("New node was added. (Parent id : %d, node's name: %s", parentId, name) );
     }
 }

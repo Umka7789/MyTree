@@ -8,14 +8,10 @@ import static ru.apache.Sirotin.Main.readString;
 
 
 
-public class ChangeNodeNameCommand implements Command {
+public class ChangeNodeNameCommand extends AbstractCommand {
 
-    private MyTree tree;
-
-	//TODO: у всех команд одинаковый конструктор - логично добавить базовый класс AbstractCommand и вынести этот конструктор
-	// и переменную, которую он ставит туда, а в дочерних конструкторах просто дергать super(tree)
     public ChangeNodeNameCommand(MyTree tree) {
-        this.tree = tree;
+        super(tree);
     }
 
     public void execute() {
@@ -23,9 +19,13 @@ public class ChangeNodeNameCommand implements Command {
         int id = readInt();
         System.out.println("Enter new name");
         String name = readString();
-        if (tree.changeNodeName(name, id))
-            System.out.println(String.format("There is no node with number %1$d", id));
-        LOG.info("Node name was changed");
+        if (tree.changeNodeName(name, id) == false) {
+            System.out.println(String.format("There is no node with number %d", id));
+            LOG.error(String.format("Cant change node's name. Reason: there is no node with number %d", id));
+            return;
+        }
+
+        LOG.info( String.format("Node's name was changed. (Node's id: %d, New name: %s", id, name) );
     }
 
 
